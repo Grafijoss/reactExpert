@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 
-import Test from './test'
+import H1 from './H1';
 
 
 // const styles = {
@@ -18,8 +18,8 @@ import Test from './test'
 // }
 
 const styles = {
-	header: () => ({
-		backgroundColor: '#282c34',
+	header: ({ backgroundColor }) => ({
+		backgroundColor,
 		minHeight: '100vh',
 		display: 'flex',
 		flexDirection: 'column',
@@ -32,6 +32,10 @@ const styles = {
 
 export default class Header extends Component {
 
+	state = {
+		backgroundColor: 'red'
+	}
+
 	handleClick = () => {
 		const { miau, handleClick } = this.props;
 		handleClick(miau);
@@ -40,22 +44,29 @@ export default class Header extends Component {
 		console.log('buenisimo');
 	}
 
+	changeColor = () => {
+		this.setState({
+			backgroundColor: '#555'
+		})
+	}
+
 	render() {
 		const { miau, handleClick } = this.props;
+		const { backgroundColor } = this.state;
 
 
 		return (
 			<header
 				className="App-header"
 				// style={styles.header}
-				style={styles.header()}
+				style={styles.header({ backgroundColor })}
 			>
 				<img
 					src={logo} className="App-logo" alt="logo" />
 				<p onClick={this.handleClick}>
 					{miau}
 				</p>
-				<Test onClick={this.pruebaClick}>Ajaa</Test>
+				<H1 onClick={this.changeColor}>Ajaa</H1>
 				<a
 					className="App-link"
 					href="https://reactjs.org"
